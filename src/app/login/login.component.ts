@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -6,6 +6,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'crm-login',
@@ -13,14 +14,26 @@ import {
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  private authent = inject(AuthenticationService);
+
   public loginForm = new FormGroup({
-    login: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [Validators.required, checkPassword]),
+    login: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(3)],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, checkPassword],
+      nonNullable: true,
+    }),
   });
 
   onSubmit(): void {
-    console.log('submit');
-    // ...
+    console.log('submit', this.loginForm.value);
+
+    const { login, password } = this.loginForm.getRawValue();
+    const res = this.authent.authentUser(login, password);
+
+    console.log('authent.authentUser', res);
   }
 }
 
