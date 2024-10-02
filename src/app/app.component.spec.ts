@@ -2,6 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { Component } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material.module';
 
 @Component({
   selector: 'crm-login',
@@ -12,7 +14,11 @@ class LoginTestComponent {}
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([])],
+      imports: [
+        RouterModule.forRoot([]),
+        NoopAnimationsModule,
+        AppMaterialModule,
+      ],
       declarations: [AppComponent, LoginTestComponent],
     }).compileComponents();
   });
