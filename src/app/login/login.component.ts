@@ -15,11 +15,7 @@ import {
 export class LoginComponent {
   public loginForm = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      checkPassword,
-    ]),
+    password: new FormControl('', [Validators.required, checkPassword]),
   });
 
   onSubmit(): void {

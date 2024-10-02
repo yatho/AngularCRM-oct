@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../app-material.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HelpComponent } from '../component/help/help.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -11,7 +12,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [LoginComponent, HelpComponent],
       imports: [ReactiveFormsModule, AppMaterialModule, NoopAnimationsModule],
     }).compileComponents();
 

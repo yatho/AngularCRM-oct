@@ -1,58 +1,47 @@
 <div class="login-form-container">
   <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label for="login">Username</mat-label>
-      <input matInput id="login" type="text" formControlName="login" />
-      <span
-        class="help-block"
-        *ngIf="
-          (loginForm.controls.login.touched ||
-            loginForm.controls.login.dirty) &&
-          loginForm.controls.login.errors
-        "
+    <p>
+      <mat-form-field>
+        <mat-label for="login">Identifiant</mat-label>
+        <input matInput id="login" type="text" formControlName="login" />
+      </mat-form-field>
+      <crm-help
+        [field]="loginForm.controls.login"
+        [errorMessages]="{
+          required: 'Entrez votre login',
+          minlength: 'Le login doit avoir un minimum de 3 caractères.'
+        }"
       >
-        <span *ngIf="loginForm.controls.login.errors['required']">
-          Enter your login
-        </span>
-        <span *ngIf="loginForm.controls.login.errors['minlength']">
-          The login must have a minimum of 3 characters.
-        </span>
-      </span>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label for="password">Mot de passe</mat-label>
-      <input
-        matInput
-        id="password"
-        type="password"
-        formControlName="password"
-      />
-      @if((loginForm.controls.password.touched ||
-      loginForm.controls.password.dirty) && loginForm.controls.password.errors)
-      {
-
-      <span class="help-block">
-        @if(loginForm.controls.password.errors['required']) {
-        <span> Enter your password </span>
-        } @else if (loginForm.controls.password.errors['minlength']) {
-        <span>
-          The password is invalid must have a minimum of 3 characters.
-        </span>
-        }@else if (loginForm.controls.password.errors['checkPassword']) {
-        <span>
-          The password is invalid must have a minimum of 5 characters.
-        </span>
-        }
-      </span>
-      }
-    </mat-form-field>
-    <button
-      mat-button
-      type="submit"
-      [disabled]="loginForm.invalid"
-      color="primary"
-    >
-      Validate
-    </button>
+      </crm-help>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label for="password">Mot de passe</mat-label>
+        <input
+          matInput
+          id="password"
+          type="password"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <crm-help
+        [field]="loginForm.controls.password"
+        [errorMessages]="{
+          required: 'Entrez votre mot de passe',
+          checkPassword: 'Le composant doit faire plus de 5 caractères'
+        }"
+      >
+      </crm-help>
+    </p>
+    <p>
+      <button
+        mat-button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        color="primary"
+      >
+        Validate
+      </button>
+    </p>
   </form>
 </div>
