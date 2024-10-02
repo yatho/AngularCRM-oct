@@ -7,6 +7,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { AuthenticationService } from './authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'crm-login',
@@ -15,6 +16,13 @@ import { AuthenticationService } from './authentication.service';
 })
 export class LoginComponent {
   private authent = inject(AuthenticationService);
+  private router = inject(Router);
+
+  constructor() {
+    if (this.authent.authenticated) {
+      this.authent.disconnect();
+    }
+  }
 
   public loginForm = new FormGroup({
     login: new FormControl('', {
@@ -32,8 +40,10 @@ export class LoginComponent {
 
     const { login, password } = this.loginForm.getRawValue();
     const res = this.authent.authentUser(login, password);
+    if (!res) return;
 
     console.log('authent.authentUser', res);
+    this.router.navigate(['/home']);
   }
 }
 
