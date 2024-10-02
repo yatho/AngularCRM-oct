@@ -1,8 +1,8 @@
 <div class="login-form-container">
   <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <p>
-      <label for="login">Identifiant</label>
-      <input id="login" type="text" formControlName="login" />
+    <mat-form-field>
+      <mat-label for="login">Username</mat-label>
+      <input matInput id="login" type="text" formControlName="login" />
       <span
         class="help-block"
         *ngIf="
@@ -18,10 +18,15 @@
           The login must have a minimum of 3 characters.
         </span>
       </span>
-    </p>
-    <p>
-      <label for="password">Mot de passe</label>
-      <input id="password" type="password" formControlName="password" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="password">Mot de passe</mat-label>
+      <input
+        matInput
+        id="password"
+        type="password"
+        formControlName="password"
+      />
       @if((loginForm.controls.password.touched ||
       loginForm.controls.password.dirty) && loginForm.controls.password.errors)
       {
@@ -40,9 +45,14 @@
         }
       </span>
       }
-    </p>
-    <p>
-      <button type="submit" [disabled]="loginForm.invalid">Validate</button>
-    </p>
+    </mat-form-field>
+    <button
+      mat-button
+      type="submit"
+      [disabled]="loginForm.invalid"
+      color="primary"
+    >
+      Validate
+    </button>
   </form>
 </div>

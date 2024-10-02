@@ -6,20 +6,17 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppMaterialModule,
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
