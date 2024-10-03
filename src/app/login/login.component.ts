@@ -36,14 +36,13 @@ export class LoginComponent {
   });
 
   onSubmit(): void {
-    console.log('submit', this.loginForm.value);
-
     const { login, password } = this.loginForm.getRawValue();
     const res = this.authent.authentUser(login, password);
-    if (!res) return;
-
-    console.log('authent.authentUser', res);
-    this.router.navigate(['/home']);
+    res.subscribe((user) => {
+      console.log('authent.authentUser', user);
+      if (!user) return;
+      this.router.navigate(['/home']);
+    });
   }
 }
 

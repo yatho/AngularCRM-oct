@@ -10,16 +10,36 @@ import { AppMaterialModule } from './app-material.module';
 import { DummyComponent } from './component/dummy/dummy.component';
 import { HelpComponent } from './component/help/help.component';
 import { HomeComponent } from './home/home.component';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { httpInterceptorInterceptor } from './http-interceptor.interceptor';
+import { PhonePipe } from './common/phone.pipe';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DummyComponent, HelpComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DummyComponent,
+    HelpComponent,
+    HomeComponent,
+    PhonePipe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     AppMaterialModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([httpInterceptorInterceptor])
+    ),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
